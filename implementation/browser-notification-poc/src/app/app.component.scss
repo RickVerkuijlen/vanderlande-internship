@@ -1,0 +1,92 @@
+div.header {
+    background-color: #ff8b39;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 10px;
+    div.title {
+        text-align: center;
+        h1 {
+            border-bottom: 5px solid white;
+            display: inline;
+            font-size: 50px;
+            font-style: italic;
+        }
+        h2 {
+            font-style: italic;
+            font-size: 25px;
+            margin-top: 5px;
+            color: #303030;
+        }
+    }
+}
+
+div.content {
+    width: 80%;
+    margin: 0 auto;
+    div.demo {
+        display: table-cell;
+        width: 50%;
+        padding: 10px;
+    }
+    div.checklist {
+        padding: 10px;
+        display: table-cell;
+        text-align: justify;
+        li {
+            display: list-item;
+            i {
+                font-size: 12px;
+                color: grey;
+            }
+        }
+    }
+}
+
+table {
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-spacing: 0;
+    text-align: center;
+    margin: 0 auto;
+}
+
+tr, th, td {
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    padding: 5px;
+}
+
+p.comment {
+    color: gray;
+    font-style: italic;
+    font-size: 11px;
+}
+
+sup {
+    font-style: italic;
+    font-size: 11px;
+}
+
+button#send {
+    border: 5px solid #ff8b39;
+    background-color: #ffd7b3;
+    color: rgb(51, 51, 51);
+    font-size: 25px;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    outline-color: darkorange;
+    &:hover {
+        border-color: #ffad72;
+        background-color: #ffe7d3;
+        color: rgb(78, 78, 78);
+    }
+}
+
+@media only screen and (max-width: 430px) {
+    div.demo {
+        display: block !important;
+        width: 100% !important;
+    }
+}

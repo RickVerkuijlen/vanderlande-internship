@@ -1,0 +1,40 @@
+<div class="header">
+    <h1>Chat function</h1>
+    <h2>Proof of concept</h2>
+</div>
+<div class="content">
+    <div class="input">
+        <input type="text" (change)="updateUsername($event)" placeholder="Username"/>
+    
+        <input type="text" (change)="updateTopicName($event)" placeholder="Topic name"/>
+        <button (click)="createTopic()">Create topic</button>
+    </div>
+    <div class="row">
+        <div class="allTopics">
+            <div class="topic" *ngFor="let topic of allTopics$ | async">
+                <div class="topic-header">
+                    <h1>{{topic.id}}</h1>
+                </div>
+                <span>Members: {{topic.joinedUsers.length}}</span>
+                <button (click)="joinTopic(topic.id)">Join</button>
+            </div>
+        </div>
+        
+        <div class="chat" *ngIf="currentChat$ | async as currentChat">
+            <h1>{{currentChat.id}}</h1>
+            <ul class="joined-users">
+                <li *ngFor="let user of currentChat.joinedUsers">{{user.name}}</li>
+            </ul>
+            <div id="chatmessages" >
+                <div class="message" *ngFor="let message of currentChat.chatMessages" [class.own]="message.sender == this.userName">
+                    <div class="message-text">
+                        <p>{{message.message}}</p>
+                        <span class="sender" *ngIf="message.sender !== this.userName">{{message.sender}} </span>
+                        <span class="time">{{message.timestamp | date:'shortTime'}}</span>
+                    </div>
+                </div>
+            </div>
+            <input type="text" placeholder="Message" id="chat-input" (keyup.enter)="sendMessage($event, currentChat.id)"/>
+        </div> 
+    </div>   
+</div>

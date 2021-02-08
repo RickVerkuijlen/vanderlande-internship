@@ -1,0 +1,88 @@
+<div class="header">
+  <div class="title">
+    <h1>Webbrowser Notifications</h1>
+    <h2>Proof of Concept</h2>
+  </div>
+</div>
+<div class="content">
+  <div class="demo" *ngIf="permissions$ | async as permissions">
+    <h3>Demo</h3>
+    <b>Notifications are {{permissions}}</b> <p *ngIf="permissions !== 'granted'">You need to accept notifications. Click on the 🛈 and choose allow for the notifications. This does not work in Incognito mode!</p><br />
+    <button (click)="notify()" id="send" *ngIf="permissions === 'granted'">Send notification</button>
+    <p>Most recent notification action: {{result}}</p>
+    <p>Message of the notification: {{notification}}</p>
+    <p>Priority: {{priority}}</p>
+    <br />
+    <h4>Sequence diagram</h4>
+    <img src="../assets/sequence-diagram.png" alt="Sequence diagram" />
+    <p class="comment">Sequence diagram based on my takes of how the program works.</p>
+  </div>
+  
+  <div class="checklist">
+    <h3>Description</h3>
+    <p>This PoC is written with the Notification API from Angular. The notifications are being processed by an Angular Service Worker.<br /><br />
+      A service worker is a script that your browser runs in the background, seperate from a web page. This lets us work with features that do not need a
+      web page or user interaction.
+      Service workers only work on trusted website. So your website needs to have an SSL certificate, otherwise the service worker will not work.<br /><br />
+      If you press on the 🛈 in your URL bar, you can see if the notifications are allowed. These needs to be allowed to receive the push notifications.
+      If these are blocked, the notifications will not show up. If the user has blocked the notifications, the only way to ask for permission again is if the user himself clicks on the 🛈
+      and grants permission again.</p>
+    <h4>Deployment</h4>
+    <p>Because service workers only work in a secure web server, this website is hosted on Firebase Hosting. Using the Firebase CLI I can deploy a build of the website.
+    Every time I have a new feature, this will be updated on this website. <br />
+    Because this website is secure, I can test this on mobile devices as well. </p>
+    <h4>Feedback</h4>
+    <p>I mixed the program with promises and observables. Best practice would be to use one or the other. You can convert promises into observables. 
+      The feedback that was given was mostly how to write the software with the best practices. In my next PoC I am going to use only observables. <br />
+      I need to stop using <code>any</code> types. Best practice would be to create a model for the different types. In this PoC it is not that necessary. If the type is getting
+      to complex, I can make an easier model like a view model.
+    </p>
+    <h4>What is the next step?</h4>
+    <p>This PoC requires the user to press the button. That way the user can receive a push notification. The next step should be that an external source can send the notification.<br />
+    Not only the current user needs to receive a message. Employees that work with the machines, should get this message as well. In the next PoC, an external source can send a notification
+    and multiple clients will receive the same push notification</p>
+
+    <table>
+      <caption style="font-weight: bold; font-size: x-large;">Test Matrix</caption>
+      <tr>
+        <th></th>
+        <th>Google Chrome</th>
+        <th>Mozilla Firefox</th>
+        <th>Microsoft Edge</th>
+      </tr>
+      <tr>
+        <th>Windows 10</th>
+        <td>✅</td>
+        <td>✅ / ❌ <sup>1</sup></td>
+        <td>✅</td>
+      </tr>
+      <tr>
+        <th>MacOSX</th>
+        <td>✅</td>
+        <td bgcolor="darkred"></td>
+        <td bgcolor="darkred"></td>
+      </tr>
+      <tr>
+        <th>> Android 9</th>
+        <td>✅</td>
+        <td bgcolor="darkred"></td>
+        <td bgcolor="darkred"></td>
+      </tr>
+      <tr>
+        <th>iOS 13</th>
+        <td>❌ <sup>2</sup></td>
+        <td bgcolor="darkred"></td>
+        <td bgcolor="darkred"></td>
+      </tr>
+    </table>
+
+    <p class="comment">1: Works on browser level but notifications do not show up in the notification centre of the OS.</p>
+    <p class="comment">2: As of September 2020, Safari and Chrome show a blank screen.</p>
+
+    <h3>Bibliography</h3>
+    <ul>
+      <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/showNotification" target="_blank">Notification documentation</a></li>
+      <li><a href="https://medium.com/@smarth55/extending-the-angular-cli-service-worker-44bfc205894c" target="_blank">Service worker article</a></li>
+    </ul>
+  </div>
+</div>

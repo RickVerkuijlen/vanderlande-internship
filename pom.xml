@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.vanderlande.vux</groupId>
+    <artifactId>parent-app</artifactId>
+    <version>2.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>Vibes UX - Mobile App</name>
+
+    <description>Vibes UX - Mobile App</description>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.4.RELEASE</version>
+        <relativePath/>
+    </parent>
+
+    <modules>
+        <module>implementation</module>
+    </modules>
+
+    <properties>
+        <java.version>11</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spring.fox.swagger.version>2.9.2</spring.fox.swagger.version>
+        <maven.surefire.plugin>2.22.0</maven.surefire.plugin>
+        <node.version>v12.18.3</node.version>
+        <yarn.version>v1.13.0</yarn.version>
+        <docker.repository>${env.bamboo_docker_repository}</docker.repository>
+        <docker.image.prefix>${env.bamboo_docker_artifactory_directory}</docker.image.prefix>
+        <spring-cloud.version>Hoxton.SR6</spring-cloud.version>
+        <jaxb.api.version>2.3.0</jaxb.api.version>
+        <commons.io.version>2.6</commons.io.version>
+        <javax.activation.version>1.2.0</javax.activation.version>
+        <maven.deploy.skip>true</maven.deploy.skip>    
+    </properties>
+
+    <distributionManagement>
+        <repository>
+            <id>${deployFullReleaseId}</id>
+            <name>${deployFullReleaseName}</name>
+            <url>${deployFullReleaseUrl}</url>
+        </repository>
+        <snapshotRepository>
+            <uniqueVersion>false</uniqueVersion>
+            <id>${deploySnapshotId}</id>
+            <name>${deploySnapshotName}</name>
+            <url>${deploySnapshotUrl}</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <repositories>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <build>
+    </build>
+
+</project>

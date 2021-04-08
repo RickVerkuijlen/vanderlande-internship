@@ -45,7 +45,6 @@ export class WebsocketService {
   private processTopics(payload: any): void {
     const wsMessage: WsMessage = JSON.parse(payload.body);
 
-    console.log('aaaaa');
     console.log(JSON.parse(wsMessage.content) as Topic[]);
 
     if (wsMessage.messageType !== MessageType.ERROR) {
